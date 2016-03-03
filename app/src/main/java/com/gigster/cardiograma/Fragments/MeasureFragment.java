@@ -189,7 +189,7 @@ public class MeasureFragment extends Fragment {
                 graph2LastXValue += 1d;
                 double data = getRandom();
                 mSeries2.appendData(new DataPoint(graph2LastXValue, data), true, 100);
-                if (GConstants.isAutoStop && graph2LastXValue > 150){
+                if (GConstants.isAutoStop && graph2LastXValue > 200){
                     onClickStart();
                 }else{
                     mHandler.postDelayed(this, 100);

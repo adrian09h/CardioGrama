@@ -25,21 +25,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.apptentive.android.sdk.Apptentive;
 import com.gigster.cardiograma.Contollers.ImageProcessing;
 import com.gigster.cardiograma.Fragments.MainFragment;
 import com.gigster.cardiograma.Models.GConstants;
 import com.gigster.cardiograma.Models.HeartBeatDetected;
 import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.R;
+import com.mopub.mobileads.MoPubView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import butterknife.Bind;
 import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
+    MoPubView moPubView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,32 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.content_frag, new MainFragment()).commitAllowingStateLoss();
         initSurface();
+
+        moPubView = (MoPubView) findViewById(R.id.adview);
+        moPubView.setAdUnitId(getResources().getString(R.string.mopubAdsId)); // Enter your Ad Unit ID from www.mopub.com
+        moPubView.loadAd();
+
+//        AdView mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Apptentive.onStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Apptentive.onStop(this);
+    }
+
+    @Override
+    public void onDestroy(){
+        moPubView.destroy();
+        super.onDestroy();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void supportCustomer(){
-
+        Apptentive.showMessageCenter(MainActivity.this);
     }
 
     public void replaceFragment(Fragment frag, int anim_type, boolean isAddToBackStack) {

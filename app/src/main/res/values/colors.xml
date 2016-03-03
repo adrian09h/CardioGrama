@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f9f9f9</color>
+    <color name="colorPrimaryDark">#D0021B</color>
+    <color name="colorAccent">#D0021B</color>
+    <color name="colorPopMenu">#5E5E5E</color>
+    <color name="colorMenuText">#F2F2F2</color>
+    <color name="colorActionBar">#f9f9f9</color>
+    <color name="colorActionBarTextColor">#646464</color>
+    <color name="colorBrandRed">#D0021B</color>
+
+    <color name="colorDiscardBtn">#606060</color>
+    <color name="colorSaveBtn">#87D632</color>
+    <color name="colorBtnBounds">#C9C9C9</color>
+    <color name="colorBtnBG">#FBFBFB</color>
+
+</resources>

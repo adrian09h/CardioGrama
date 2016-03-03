@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Cardiograma</string>
+    <string name="action_settings">Settings</string>
+    <string name="Sounds">Sounds</string>
+    <string name="Auto_Stop">Auto Stop</string>
+    <string name="Support">Support</string>
+    <string name="hint">Cover the rear camera with your \n fignertip and press start</string>
+    <string name="bpm">bpm</string>
+    <string name="Discard">Discard</string>
+    <string name="Save">Save</string>
+    <string name="REST">REST</string>
+    <string name="WARM_UP">WARM UP</string>
+    <string name="CARDIO">CARDIO</string>
+    <string name="EXTREME">EXTREME</string>
+</resources>

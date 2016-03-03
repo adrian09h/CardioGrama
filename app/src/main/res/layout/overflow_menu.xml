@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPopMenu"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/colorMenuText"
+        android:text="@string/Sounds"
+        android:textSize="18sp"
+        />
+    <ImageView
+        android:id="@+id/imgvSwitchSounds_Menu"
+        android:layout_width="@android:dimen/app_icon_size"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginRight="@android:dimen/app_icon_size"
+        android:src="@drawable/switch_on"
+        android:scaleType="fitCenter"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+    <LinearLayout
+        android:id="@+id/linHeartBeat"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/round_bg_grayborder"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtHeartBeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="65"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_24sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/bpm"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linHeartBeat"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="18 Feb 2016 14:10"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_15sdp"/>
+    <ImageView
+        android:id="@+id/imgvMotionState"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_alignTop="@+id/linHeartBeat"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/rest_deselected" />
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_below="@+id/linHeartBeat"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:visibility="visible" />
+
+</RelativeLayout>

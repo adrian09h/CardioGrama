@@ -189,7 +189,11 @@ public class MeasureFragment extends Fragment {
                 graph2LastXValue += 1d;
                 double data = getRandom();
                 mSeries2.appendData(new DataPoint(graph2LastXValue, data), true, 100);
-                mHandler.postDelayed(this, 100);
+                if (GConstants.isAutoStop && graph2LastXValue > 150){
+                    onClickStart();
+                }else{
+                    mHandler.postDelayed(this, 100);
+                }
             }
         };
         mHandler.postDelayed(mTimer2, 3000);
@@ -218,8 +222,10 @@ public class MeasureFragment extends Fragment {
             switch (nCount) {
                 case 1:
                     updatedYValue = 2;
-                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                    if (GConstants.isSoundOn){
+                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                        toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                    }
                     break;
                 case 2:
                     updatedYValue = -2;

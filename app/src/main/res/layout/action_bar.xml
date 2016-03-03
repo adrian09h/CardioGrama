@@ -16,6 +16,7 @@
         android:textSize="@dimen/_20sdp"
         />
     <ImageView
+        android:id="@+id/imgvMore"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_30sdp"
         android:paddingTop="@dimen/_5sdp"

@@ -1,6 +1,8 @@
 package com.gigster.cardiograma.Activities;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -10,12 +12,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.gigster.cardiograma.Contollers.ImageProcessing;
 import com.gigster.cardiograma.Fragments.MainFragment;
@@ -71,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     void setUpActionBar(){
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -80,11 +90,64 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View actionBarView = inflator
                 .inflate(R.layout.action_bar, null);
+        ImageView imgMore = (ImageView)actionBarView.findViewById(R.id.imgvMore);
+        imgMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                replaceFragment(new MenuFragment(), GConstants.Anim_None, false);
+                showDialog();
+            }
+        });
+
         actionBar.setCustomView(actionBarView);
         actionBar.setDefaultDisplayHomeAsUpEnabled(true);
 
         Toolbar parent = (Toolbar) actionBarView.getParent();
         parent.setContentInsetsAbsolute(0, 0);
+    }
+
+    public void showDialog() {
+
+        String p_message = "Are you enjoying DartGenie? Please take a moment to rate it!";
+        final Dialog dialog = new Dialog(this, R.style.AppTheme);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.fragment_menu);
+        android.support.v7.widget.SwitchCompat switchSound = (android.support.v7.widget.SwitchCompat) dialog.findViewById(R.id.switchSounds);
+        switchSound.setChecked(GConstants.isSoundOn);
+        switchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                GConstants.isSoundOn = isChecked;
+            }
+        });
+        android.support.v7.widget.SwitchCompat switchAutoStop = (android.support.v7.widget.SwitchCompat) dialog.findViewById(R.id.switchAutoStop);
+        switchAutoStop.setChecked(GConstants.isAutoStop);
+        switchAutoStop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                GConstants.isAutoStop = isChecked;
+            }
+        });
+
+        ImageButton imgbSupport = (ImageButton)dialog.findViewById(R.id.imgbInfo_Menu);
+        imgbSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                supportCustomer();
+            }
+        });
+        LinearLayout linEntire = (LinearLayout)dialog.findViewById(R.id.linEntire);
+        linEntire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    void supportCustomer(){
+
     }
 
     public void replaceFragment(Fragment frag, int anim_type, boolean isAddToBackStack) {

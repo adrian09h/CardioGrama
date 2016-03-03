@@ -1,18 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--<item-->
-        <!--android:id="@+id/action_settings"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/action_settings"-->
-        <!--app:showAsAction="never" />-->
-    <!--<item-->
-        <!--android:id="@+id/item_sounds"-->
-        <!--android:title="Badges"-->
+        <!--android:id="@+id/myswitch"-->
+        <!--android:title=""-->
         <!--app:showAsAction="never"-->
-        <!--android:actionLayout="@round_rect_buttonbg/overflow_menu"-->
+        <!--app:actionLayout="@layout/overflow_menu"-->
         <!--/>-->
-
+    <!--<item-->
+        <!--android:id="@+id/myswitch2"-->
+        <!--android:title=""-->
+        <!--app:showAsAction="never"-->
+        <!--app:actionLayout="@layout/overflow_menu"-->
+        <!--/>-->
 </menu>

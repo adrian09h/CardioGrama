@@ -95,6 +95,7 @@ public class HistoryAdapter extends BaseAdapter {
 
 			LineGraphSeries<DataPoint> mSeries2 = new LineGraphSeries<DataPoint>(getDataPoints(beatdata.data));
 			mSeries2.setColor(Color.RED);
+			holder.graph.removeAllSeries();
 			holder.graph.addSeries(mSeries2);
 			holder.graph.getViewport().setXAxisBoundsManual(true);
 			holder.graph.getViewport().setMinX(0);
@@ -105,6 +106,7 @@ public class HistoryAdapter extends BaseAdapter {
 			holder.graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE); // get rid of grid
 			holder.graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);// hide x axis
 			holder.graph.getGridLabelRenderer().setVerticalLabelsVisible(false);// hide y axis
+
 
 		}catch (Exception e){
 			e.printStackTrace();

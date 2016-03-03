@@ -37,17 +37,11 @@
                 android:visibility="gone">
             </SurfaceView>
             <FrameLayout
-                android:id="@+id/container"
+                android:id="@+id/content_frag"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:fitsSystemWindows="true"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:id="@+id/content_frag"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"/>
+                >
             </FrameLayout>
         </RelativeLayout>
     </LinearLayout>

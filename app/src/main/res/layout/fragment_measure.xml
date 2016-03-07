@@ -106,7 +106,9 @@
             android:id="@+id/imgvStart"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_centerHorizontal="true"
             android:scaleType="fitCenter"
             android:src="@drawable/start" />
     </RelativeLayout>
@@ -123,7 +125,7 @@
             android:layout_height="@dimen/_100sdp"
             android:background="@drawable/round_bg"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical">
             <TextView
@@ -151,7 +153,7 @@
             android:layout_height="@dimen/_45sdp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_40sdp">
+            android:layout_marginBottom="@dimen/_50sdp">
             <TextView
                 android:id="@+id/txtDiscard"
                 android:layout_width="0dp"

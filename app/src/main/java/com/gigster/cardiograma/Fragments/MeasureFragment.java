@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.activeandroid.query.Select;
 import com.gigster.cardiograma.Activities.MainActivity;
 import com.gigster.cardiograma.Models.GConstants;
 import com.gigster.cardiograma.Models.HeartBeatDetected;
@@ -22,14 +21,8 @@ import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.Models.HistoryHeartData;
 import com.gigster.cardiograma.R;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import com.jjoe64.graphview.GraphView;

@@ -1,5 +1,6 @@
 package com.gigster.cardiograma.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,8 +66,11 @@ public class MainFragment extends Fragment {
         for (int i = 0; i < tabHost.getTabWidget().getTabCount(); i++) {
             AppCompatTextView appCompatTextView = (AppCompatTextView) tabHost.getTabWidget().getChildAt(i);
             appCompatTextView.setTextColor(getResources().getColor(R.color.colorBrandRed));
+            float aa = getResources().getDimension(R.dimen._10sdp);
             appCompatTextView.setTextSize(20.0f);
             appCompatTextView.setGravity(Gravity.CENTER);
+            appCompatTextView.setBackgroundColor(Color.red(1));
+
         }
 
         return viewFrag;

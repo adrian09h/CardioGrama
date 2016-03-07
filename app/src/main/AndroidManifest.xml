@@ -20,7 +20,7 @@
         android:anyDensity="true"/>
 
     <application
-        android:name=".App.MainApp"
+        android:name="com.gigster.cardiograma.App.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -39,7 +39,7 @@
 
 
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name="com.gigster.cardiograma.Activities.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="com.gigster.cardiograma.Activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -66,7 +66,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="5e2a284c19571b30e45e128ed8c50c9b90084e38" />
+            android:value="fea5ab4d82e9f6f3ea38a647e0aa2d46af592fa6" />
     </application>
 
 </manifest>

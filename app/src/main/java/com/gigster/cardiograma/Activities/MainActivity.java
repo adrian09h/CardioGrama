@@ -12,14 +12,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,11 +30,12 @@ import com.gigster.cardiograma.Models.GConstants;
 import com.gigster.cardiograma.Models.HeartBeatDetected;
 import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mopub.mobileads.MoPubView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import butterknife.Bind;
 import de.greenrobot.event.EventBus;
 
 
@@ -60,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.content_frag, new MainFragment()).commitAllowingStateLoss();
         initSurface();
 
-        moPubView = (MoPubView) findViewById(R.id.adview);
-        moPubView.setAdUnitId(getResources().getString(R.string.mopubAdsId)); // Enter your Ad Unit ID from www.mopub.com
-        moPubView.loadAd();
+//        moPubView = (MoPubView) findViewById(R.id.adview);
+//        moPubView.setAdUnitId(getResources().getString(R.string.mopubAdsId)); // Enter your Ad Unit ID from www.mopub.com
+//        moPubView.loadAd();
 
-//        AdView mAdView = (AdView) findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
-        moPubView.destroy();
+//        moPubView.destroy();
         super.onDestroy();
     }
     @Override

@@ -12,12 +12,9 @@ import android.widget.ListView;
 import com.activeandroid.query.Select;
 import com.gigster.cardiograma.Activities.MainActivity;
 import com.gigster.cardiograma.Fragments.Adapters.HistoryAdapter;
-import com.gigster.cardiograma.Models.GConstants;
 import com.gigster.cardiograma.Models.HistoryHeartData;
 import com.gigster.cardiograma.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.Bind;

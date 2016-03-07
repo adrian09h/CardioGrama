@@ -5,7 +5,6 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by admin1 on 3/2/2016.

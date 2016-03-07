@@ -45,13 +45,7 @@
                 android:fitsSystemWindows="true"
                 >
             </FrameLayout>
-            <com.mopub.mobileads.MoPubView
-                android:id="@+id/adview"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:visibility="gone"
-                />
+
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="wrap_content"

@@ -70,6 +70,7 @@ public class HistoryAdapter extends BaseAdapter {
 					.findViewById(R.id.txtDate);
 			holder.imgvState = (ImageView) convertView.findViewById(R.id.imgvMotionState);
 			holder.graph = (GraphView)convertView.findViewById(R.id.graph);
+			holder.txtMotionStateNote = (TextView)convertView.findViewById(R.id.txtMotionStateNote);
 			convertView.setTag(holder);
 		} else {
 			holder = (HistoryHolder) convertView.getTag();
@@ -78,9 +79,10 @@ public class HistoryAdapter extends BaseAdapter {
 		final HistoryHeartData beatdata = arrayHistoryData.get(position);
 		try {
 			String strHeartBeat = String.valueOf(beatdata.heart_beat);
-			holder.txtHeartBeat.setText(strHeartBeat);//beatdata.heart_beat);
+			holder.txtHeartBeat.setText(strHeartBeat);
 			String strDate = dateFormatter.format(beatdata.saved_date);
 			holder.txtDate.setText(strDate);
+			holder.txtMotionStateNote.setText(beatdata.motion_state_note);
 			if (beatdata.motion_state.equals(mContext.getResources().getString(R.string.REST))){
 				Picasso.with(mContext).load(R.drawable.rest_deselected).into(holder.imgvState);
 			} else if (beatdata.motion_state.equals(mContext.getResources().getString(R.string.WARM_UP))){
@@ -131,6 +133,7 @@ public class HistoryAdapter extends BaseAdapter {
 		TextView txtDate;
 		ImageView imgvState;
 		GraphView graph;
+		TextView txtMotionStateNote;
 	}
 
 }

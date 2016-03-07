@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -67,6 +68,15 @@ public class MeasureFragment extends Fragment {
     ImageView imgvExtreme;
     @Bind(R.id.txtHeartBeat_SaveMode)
     TextView txtHeartBeatSaveMode;
+    @Bind(R.id.editREST)
+    EditText editRest;
+    @Bind(R.id.editCardio)
+    EditText editCardio;
+    @Bind(R.id.editWarmup)
+    EditText editWarmup;
+    @Bind(R.id.editExtreme)
+    EditText editExtreme;
+
 
 
     final String TAG = "MeasureFrag";
@@ -262,6 +272,7 @@ public class MeasureFragment extends Fragment {
             imgvWarmUp.setImageResource(R.drawable.warmup_deselected);
             imgvCardio.setImageResource(R.drawable.cardiounselected);
             imgvExtreme.setImageResource(R.drawable.extremeunselected);
+            requestFocusAndShowKeyboard(editRest);
         }
 
     }
@@ -274,6 +285,7 @@ public class MeasureFragment extends Fragment {
             imgvWarmUp.setImageResource(R.drawable.warmup_selected);
             imgvCardio.setImageResource(R.drawable.cardiounselected);
             imgvExtreme.setImageResource(R.drawable.extremeunselected);
+            requestFocusAndShowKeyboard(editWarmup);
         }
     }
 
@@ -285,6 +297,7 @@ public class MeasureFragment extends Fragment {
             imgvWarmUp.setImageResource(R.drawable.warmup_deselected);
             imgvCardio.setImageResource(R.drawable.cardioselected);
             imgvExtreme.setImageResource(R.drawable.extremeunselected);
+            requestFocusAndShowKeyboard(editCardio);
         }
     }
 
@@ -296,12 +309,23 @@ public class MeasureFragment extends Fragment {
             imgvWarmUp.setImageResource(R.drawable.warmup_deselected);
             imgvCardio.setImageResource(R.drawable.cardiounselected);
             imgvExtreme.setImageResource(R.drawable.extremeselected);
+            requestFocusAndShowKeyboard(editExtreme);
         }
     }
 
     @OnClick(R.id.txtSave)
     void onClickSave() {
-        saveData( Integer.parseInt(txtHeartBeat.getText().toString()), motion_state);
+        String strMotionStateNote = "";
+        if (motion_state.equals(getResources().getString(R.string.REST))){
+            strMotionStateNote = editRest.getText().toString();
+        } else if (motion_state.equals(getResources().getString(R.string.WARM_UP))){
+            strMotionStateNote = editWarmup.getText().toString();
+        } else if (motion_state.equals(getResources().getString(R.string.CARDIO))){
+            strMotionStateNote = editCardio.getText().toString();
+        } else if (motion_state.equals(getResources().getString(R.string.EXTREME))){
+            strMotionStateNote = editExtreme.getText().toString();
+        }
+        saveData( Integer.parseInt(txtHeartBeat.getText().toString()), motion_state,strMotionStateNote);
         onClickDiscard();
     }
 
@@ -309,6 +333,11 @@ public class MeasureFragment extends Fragment {
     void onClickDiscard() {
         working_mode = WORKING_MODE.Hint_Mode;
         updateUI();
+    }
+
+    void requestFocusAndShowKeyboard(EditText editText){
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
     }
 
     void updateUI() {
@@ -338,7 +367,7 @@ public class MeasureFragment extends Fragment {
         }
     }
 
-    void saveData(int heart_beat, String motion_state) {
+    void saveData(int heart_beat, String motion_state, String motion_state_note) {
         double maxX = mSeries2.getHighestValueX();
         Iterator<DataPoint> aa = mSeries2.getValues(maxX - 40, maxX);
         StringBuilder sb = new StringBuilder();
@@ -349,7 +378,7 @@ public class MeasureFragment extends Fragment {
         Log.i(TAG,"update array with: "+sb.toString());
         Date today = new Date();
         Log.i(TAG, "data: " + sb.toString());
-        HistoryHeartData historyHeartData = new HistoryHeartData(sb.toString(), heart_beat, motion_state, today);
+        HistoryHeartData historyHeartData = new HistoryHeartData(sb.toString(), heart_beat, motion_state, today, motion_state_note);
         historyHeartData.save();
     }
 

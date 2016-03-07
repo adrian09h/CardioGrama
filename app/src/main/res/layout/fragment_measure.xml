@@ -183,10 +183,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_85sdp"
+            android:layout_height="@dimen/_135sdp"
             android:orientation="horizontal"
             android:layout_above="@+id/linButtons"
-            android:layout_marginBottom="@dimen/_60sdp">
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <RelativeLayout
                 android:id="@+id/relRest"
@@ -203,14 +203,16 @@
                     android:paddingRight="@dimen/_5sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/rest_deselected" />
-                <TextView
+                <EditText
+                    android:id="@+id/editREST"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/transparent"
+                    android:layout_below="@+id/imgvRest"
                     android:text="@string/REST"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|top"
                     />
 
             </RelativeLayout>
@@ -230,14 +232,16 @@
                     android:paddingRight="@dimen/_5sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/warmup_selected" />
-                <TextView
+                <EditText
+                    android:id="@+id/editWarmup"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/transparent"
+                    android:layout_below="@+id/imgvWarmup"
                     android:text="@string/WARM_UP"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|top"
                     />
 
             </RelativeLayout>
@@ -258,14 +262,16 @@
                     android:paddingRight="@dimen/_5sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/cardiounselected" />
-                <TextView
+                <EditText
+                    android:id="@+id/editCardio"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/transparent"
+                    android:layout_below="@+id/imgvCardio"
                     android:text="@string/CARDIO"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|top"
                     />
 
             </RelativeLayout>
@@ -284,14 +290,16 @@
                     android:paddingRight="@dimen/_10sdp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/extremeunselected" />
-                <TextView
+                <EditText
+                    android:id="@+id/editExtreme"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/transparent"
+                    android:layout_below="@+id/imgvExtreme"
                     android:text="@string/EXTREME"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|top"
                     />
 
             </RelativeLayout>

@@ -32,7 +32,7 @@ import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.mopub.mobileads.MoPubView;
+
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -40,7 +40,6 @@ import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends AppCompatActivity {
-    MoPubView moPubView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.content_frag, new MainFragment()).commitAllowingStateLoss();
         initSurface();
 
-//        moPubView = (MoPubView) findViewById(R.id.adview);
-//        moPubView.setAdUnitId(getResources().getString(R.string.mopubAdsId)); // Enter your Ad Unit ID from www.mopub.com
-//        moPubView.loadAd();
+
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
-//        moPubView.destroy();
+
         super.onDestroy();
     }
     @Override

@@ -16,8 +16,5 @@ public class MainApp extends com.activeandroid.app.Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
 
-//        Intercom.initialize(this, "android_sdk-39f682d328be85aae47b6aa17d9fea24c210171b", "hafx61ha");
-//        Intercom.client().registerUnidentifiedUser();
-
     }
 }

@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.activeandroid.query.Select;
 import com.gigster.cardiograma.Activities.MainActivity;
 import com.gigster.cardiograma.Fragments.Adapters.HistoryAdapter;
+import com.gigster.cardiograma.Models.ChangedValueMsg;
+import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.Models.HistoryHeartData;
 import com.gigster.cardiograma.R;
 
@@ -19,6 +22,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -31,6 +35,10 @@ public class HistoryFragment extends Fragment {
 
     MainActivity activity;
 
+    List<HistoryHeartData> listHistoryDate;
+
+    public static int nFirstVisibleItem = 0;
+    public static int nVisibleCount = 3;
 
     public HistoryFragment() {
     }
@@ -43,6 +51,19 @@ public class HistoryFragment extends Fragment {
 
         activity = (MainActivity)this.activity;
 
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                nFirstVisibleItem = firstVisibleItem;
+                nVisibleCount = visibleItemCount;
+            }
+        });
+
         return frag;
     }
 
@@ -53,18 +74,14 @@ public class HistoryFragment extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    adapter = new HistoryAdapter(loadData(), getActivity().getApplicationContext());
+                    listHistoryDate = loadData();
+                    adapter = new HistoryAdapter(listHistoryDate, getActivity().getApplicationContext());
                     listView.setAdapter(adapter);
                 }
             },300);
+        }else{
+            Log.d("HistoryFrag", "OnUserVisibleHint false");
         }
-    }
-
-
-    @Override
-    public  void onResume(){
-        super.onResume();
-        Log.i("History", "onResume");
     }
 
     List<HistoryHeartData> loadData(){

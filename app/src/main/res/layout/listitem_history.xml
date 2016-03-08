@@ -54,15 +54,16 @@
         android:scaleType="fitCenter"
         android:src="@drawable/rest_deselected" />
 
-    <TextView
-        android:id="@+id/txtMotionStateNote"
+    <EditText
+        android:id="@+id/editMotionStateNote"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/_25sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_1sdp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/_5sdp"
         android:layout_toRightOf="@+id/txtDate"
         android:layout_below="@+id/imgvMotionState"
+        android:background="@drawable/transparent"
         android:text="WWWWWWWWWWWWWWW"
         android:gravity="center"
         android:textColor="@android:color/black"
@@ -74,7 +75,7 @@
         android:id="@+id/graph"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:layout_below="@+id/txtMotionStateNote"
+        android:layout_below="@+id/editMotionStateNote"
         android:layout_marginTop="@dimen/_10sdp"
         android:visibility="visible" />
 

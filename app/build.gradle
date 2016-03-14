@@ -17,9 +17,9 @@ android {
     defaultConfig {
         applicationId "com.gigster.cardiograma"
         minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 7
-        versionName "1.0"
+        targetSdkVersion 21
+        versionCode 12
+        versionName "1.8.0"
     }
     buildTypes {
         release {
@@ -33,6 +33,7 @@ repositories {
     maven { url 'http://yanzm.github.io/MaterialTabHost/repository' }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url 'https://maven.fabric.io/public' }
+//    maven { url "https://jitpack.io" }
 
 }
 
@@ -59,4 +60,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+
+//    compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
+//        transitive = true
+//    }
 }

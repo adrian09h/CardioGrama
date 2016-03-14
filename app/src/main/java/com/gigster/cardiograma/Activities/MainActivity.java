@@ -1,13 +1,17 @@
 package com.gigster.cardiograma.Activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         initSurface();
 
 
-
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -78,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
 
         super.onDestroy();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,8 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    void setUpActionBar(){
+    void setUpActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View actionBarView = inflator
                 .inflate(R.layout.action_bar, null);
-        ImageView imgMore = (ImageView)actionBarView.findViewById(R.id.imgvMore);
+        ImageView imgMore = (ImageView) actionBarView.findViewById(R.id.imgvMore);
         imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDialog() {
-
-        String p_message = "Are you enjoying DartGenie? Please take a moment to rate it!";
         final Dialog dialog = new Dialog(this, R.style.AppTheme);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.fragment_menu);
@@ -153,14 +154,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton imgbSupport = (ImageButton)dialog.findViewById(R.id.imgbInfo_Menu);
+        ImageButton imgbSupport = (ImageButton) dialog.findViewById(R.id.imgbInfo_Menu);
         imgbSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 supportCustomer();
             }
         });
-        LinearLayout linEntire = (LinearLayout)dialog.findViewById(R.id.linEntire);
+        LinearLayout linEntire = (LinearLayout) dialog.findViewById(R.id.linEntire);
         linEntire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    void supportCustomer(){
+    void supportCustomer() {
         Apptentive.showMessageCenter(MainActivity.this);
     }
 
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             trans.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
 
         trans.replace(R.id.content_frag, frag);
-        if (isAddToBackStack){
+        if (isAddToBackStack) {
             trans.addToBackStack(getResources().getString(R.string.app_name));
         }
         trans.commitAllowingStateLoss();
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.hide();
     }
+
     public void showActionBar() {
         ActionBar ab = getSupportActionBar();
         ab.show();
@@ -224,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
     private static double beats = 0;
     private static long startTime = 0;
 
+    private final int REQUEST_CAMERAPERMISSION = 1;
+
     public static enum TYPE {
         GREEN, RED
     }
@@ -234,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         return currentType;
     }
 
-    void initSurface(){
+    void initSurface() {
         preview = (SurfaceView) findViewById(R.id.preview);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
@@ -244,26 +248,79 @@ public class MainActivity extends AppCompatActivity {
         wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         wakeLock.acquire();
     }
-    public void onPause(){
+
+    public void onPause() {
         super.onPause();
         wakeLock.release();
         stopMeasure();
 
     }
 
-    public void startMeasure(){
-        camera = Camera.open();
-        preview.setVisibility(View.VISIBLE);
-        startTime = System.currentTimeMillis();
+    public boolean checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+//                MaterialDialog dialog = new MaterialDialog.Builder(this)
+//                        .title(R.string.title)
+//                        .content(R.string.content)
+//                        .positiveText(R.string.agree)
+//                        .show();
+                showRequestPermissionDialog();
+
+            } else {
+                showRequestPermissionDialog();
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public void stopMeasure(){
+    private void showRequestPermissionDialog() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                REQUEST_CAMERAPERMISSION);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERAPERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+        }
+    }
+
+
+    public void startMeasure() {
+        if (checkCameraPermission()) {
+            camera = Camera.open();
+            preview.setVisibility(View.VISIBLE);
+            startTime = System.currentTimeMillis();
+        }
+    }
+
+    public void stopMeasure() {
         preview.setVisibility(View.GONE);
-        if (camera != null){
+        if (camera != null) {
             camera.setPreviewCallback(null);
             camera.stopPreview();
             camera.release();
@@ -325,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
             if (newType != currentType) {
                 currentType = newType;
 //                image.postInvalidate();
-                if (currentType == TYPE.RED){
+                if (currentType == TYPE.RED) {
                     isHearBeatDetected = true;
                     EventBus.getDefault().post(new HeartBeatDetected(true));
 
@@ -427,10 +484,6 @@ public class MainActivity extends AppCompatActivity {
 
         return result;
     }
-
-
-
-
 
 
 }

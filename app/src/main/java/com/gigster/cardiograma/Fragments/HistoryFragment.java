@@ -33,7 +33,7 @@ public class HistoryFragment extends Fragment {
     ListView listView;
     HistoryAdapter adapter;
 
-    MainActivity activity;
+//    MainActivity activity;
 
     List<HistoryHeartData> listHistoryDate;
 
@@ -49,8 +49,6 @@ public class HistoryFragment extends Fragment {
         View frag = inflater.inflate(R.layout.fragment_history, container, false);
         ButterKnife.bind(this, frag);
 
-        activity = (MainActivity)this.activity;
-
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -63,7 +61,6 @@ public class HistoryFragment extends Fragment {
                 nVisibleCount = visibleItemCount;
             }
         });
-
         return frag;
     }
 
@@ -75,7 +72,7 @@ public class HistoryFragment extends Fragment {
                 @Override
                 public void run() {
                     listHistoryDate = loadData();
-                    adapter = new HistoryAdapter(listHistoryDate, getActivity().getApplicationContext());
+                    adapter = new HistoryAdapter(listHistoryDate, (MainActivity)getActivity(), getActivity().getApplicationContext());
                     listView.setAdapter(adapter);
                 }
             },300);
@@ -89,6 +86,25 @@ public class HistoryFragment extends Fragment {
                 .limit(30).execute();
         return queryResults;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEvent(ChangedValueMsg event) {
+        if (event.changed){
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 
 
 }

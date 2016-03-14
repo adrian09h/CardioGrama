@@ -69,8 +69,8 @@ public class MainFragment extends Fragment {
             float aa = getResources().getDimension(R.dimen._10sdp);
             appCompatTextView.setTextSize(20.0f);
             appCompatTextView.setGravity(Gravity.CENTER);
-            appCompatTextView.setBackgroundColor(Color.red(1));
-
+            int topPadding = (int)getResources().getDimension(R.dimen._4sdp);
+            appCompatTextView.setPadding(0, topPadding, 0,0);
         }
 
         return viewFrag;

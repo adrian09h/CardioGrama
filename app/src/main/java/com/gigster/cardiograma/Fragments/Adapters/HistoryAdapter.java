@@ -2,11 +2,10 @@ package com.gigster.cardiograma.Fragments.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,10 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gigster.cardiograma.Fragments.HistoryFragment;
+import com.gigster.cardiograma.Activities.MainActivity;
 import com.gigster.cardiograma.Models.ChangedValueMsg;
 import com.gigster.cardiograma.Models.GConstants;
-import com.gigster.cardiograma.Models.HeartBeatDetected;
 import com.gigster.cardiograma.Models.HistoryHeartData;
 import com.gigster.cardiograma.R;
 import com.jjoe64.graphview.GraphView;
@@ -34,17 +32,19 @@ import de.greenrobot.event.EventBus;
 
 public class HistoryAdapter extends BaseAdapter {
 
-    private List<HistoryHeartData> arrayHistoryData;
+    public static List<HistoryHeartData> arrayHistoryData;
     private LayoutInflater inflater;
+    private MainActivity mActivity;
     private Context mContext;
     DateFormat dateFormatter;
 
 
-    public HistoryAdapter(List<HistoryHeartData> historyData, Context context) {
+    public HistoryAdapter(List<HistoryHeartData> historyData, MainActivity activity, Context context) {
         this.arrayHistoryData = historyData;
         this.inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mContext = context;
+        this.mActivity = activity;
         this.dateFormatter = new SimpleDateFormat(GConstants.DateFormatString);
         dateFormatter.setLenient(false);
     }
@@ -79,6 +79,7 @@ public class HistoryAdapter extends BaseAdapter {
             holder.txtDate = (TextView) convertView
                     .findViewById(R.id.txtDate);
             holder.imgvState = (ImageView) convertView.findViewById(R.id.imgvMotionState);
+            holder.imgvEdit = (ImageView)convertView.findViewById(R.id.imgvEdit);
             holder.graph = (GraphView) convertView.findViewById(R.id.graph);
             holder.editMotionStateNote = (EditText) convertView.findViewById(R.id.editMotionStateNote);
             convertView.setTag(holder);
@@ -89,6 +90,30 @@ public class HistoryAdapter extends BaseAdapter {
         final HistoryHeartData beatdata = arrayHistoryData.get(position);
 
         try {
+//            holder.imgvState.setTag(String.valueOf(position));
+//            holder.imgvState.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onClickEdit(v);
+//                }
+//            });
+            if (beatdata.motion_state.equals(mActivity.getResources().getString(R.string.REST))) {
+                Picasso.with(mActivity).load(R.drawable.rest_deselected).into(holder.imgvState);
+            } else if (beatdata.motion_state.equals(mActivity.getResources().getString(R.string.WARM_UP))) {
+                Picasso.with(mActivity).load(R.drawable.warmup_deselected).into(holder.imgvState);
+            } else if (beatdata.motion_state.equals(mActivity.getResources().getString(R.string.CARDIO))) {
+                Picasso.with(mActivity).load(R.drawable.cardiounselected).into(holder.imgvState);
+            } else {
+                Picasso.with(mActivity).load(R.drawable.extremeunselected).into(holder.imgvState);
+            }
+            holder.imgvEdit.setTag(String.valueOf(position));
+            holder.imgvEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickEdit(v);
+                }
+            });
+
             String strHeartBeat = String.valueOf(beatdata.heart_beat);
             holder.txtHeartBeat.setText(strHeartBeat);
             String strDate = dateFormatter.format(beatdata.saved_date);
@@ -114,15 +139,7 @@ public class HistoryAdapter extends BaseAdapter {
                 }
             });
 
-            if (beatdata.motion_state.equals(mContext.getResources().getString(R.string.REST))) {
-                Picasso.with(mContext).load(R.drawable.rest_deselected).into(holder.imgvState);
-            } else if (beatdata.motion_state.equals(mContext.getResources().getString(R.string.WARM_UP))) {
-                Picasso.with(mContext).load(R.drawable.warmup_deselected).into(holder.imgvState);
-            } else if (beatdata.motion_state.equals(mContext.getResources().getString(R.string.CARDIO))) {
-                Picasso.with(mContext).load(R.drawable.cardiounselected).into(holder.imgvState);
-            } else {
-                Picasso.with(mContext).load(R.drawable.extremeunselected).into(holder.imgvState);
-            }
+
 
             LineGraphSeries<DataPoint> mSeries2 = new LineGraphSeries<DataPoint>(getDataPoints(beatdata.data));
             mSeries2.setColor(Color.RED);
@@ -147,6 +164,14 @@ public class HistoryAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void onClickEdit(View v){
+        String strPosition = (String) v.getTag();
+        int editingPosition = Integer.parseInt(strPosition);
+        DialogFragment newFragment = MyAlertDialogFragment
+                .newInstance(R.string.accept, editingPosition);
+        newFragment.show(mActivity.getSupportFragmentManager(), "dialog");
+    }
+
     public DataPoint[] getDataPoints(String strSerialized) {
         String[] strDatas = strSerialized.split(",");
         int count = strDatas.length;
@@ -163,7 +188,67 @@ public class HistoryAdapter extends BaseAdapter {
         TextView txtHeartBeat;
         TextView txtDate;
         ImageView imgvState;
+        ImageView imgvEdit;
         GraphView graph;
         EditText editMotionStateNote;
     }
+
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newInstance(int title, int position) {
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("title", title);
+            args.putInt("position", position);
+            frag.setArguments(args);
+            return frag;
+        }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_selectactivity_dialog, container, false);
+            final int curPos = getArguments().getInt("position");
+            ImageView imgvRest = (ImageView)rootView.findViewById(R.id.imgvRest);
+            imgvRest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDataAndNotify(curPos, getResources().getString(R.string.REST));
+                    dismiss();
+                }
+            });
+            ImageView imgvWarmup = (ImageView)rootView.findViewById(R.id.imgvWarmup);
+            imgvWarmup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDataAndNotify(curPos, getResources().getString(R.string.WARM_UP));
+                    dismiss();
+                }
+            });
+            ImageView imgvCardio = (ImageView)rootView.findViewById(R.id.imgvCardio);
+            imgvCardio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDataAndNotify(curPos, getResources().getString(R.string.CARDIO));
+                    dismiss();
+                }
+            });
+            ImageView imgvExtreme = (ImageView)rootView.findViewById(R.id.imgvExtreme);
+            imgvExtreme.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDataAndNotify(curPos, getResources().getString(R.string.EXTREME));
+                    dismiss();
+                }
+            });
+            getDialog().setTitle("Choose the activity");
+            return rootView;
+        }
+
+        public void setDataAndNotify(int position, String state){
+            HistoryHeartData historyHeartData =  arrayHistoryData.get(position);
+            historyHeartData.motion_state = state;
+            historyHeartData.save();
+            EventBus.getDefault().post(new ChangedValueMsg(true));
+        }
+    }
+
 }

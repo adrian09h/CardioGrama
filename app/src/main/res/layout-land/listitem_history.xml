@@ -1,0 +1,108 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_120sdp"
+    android:background="@android:color/white"
+    >
+    <LinearLayout
+        android:id="@+id/linHeartBeat"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/circlegrayborder_bg"
+        android:layout_margin="@dimen/_20sdp"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtHeartBeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="65"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_24sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/bpm"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linMiddle"
+        android:layout_width="fill_parent"
+        android:layout_toRightOf="@+id/linHeartBeat"
+        android:layout_toLeftOf="@+id/relRight"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linHeartBeat"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="18 Feb 2016 14:10"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_10sdp"/>
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relRight"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        >
+        <ImageView
+            android:id="@+id/imgvMotionState"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/rest_deselected" />
+        <ImageView
+            android:id="@+id/imgvEdit"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/imgvMotionState"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_edit_black_36dp" />
+        <EditText
+            android:id="@+id/editMotionStateNote"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:layout_below="@+id/imgvMotionState"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:background="@drawable/transparent"
+            android:text="WWWWWWWWWWWWWWWWWWWWW"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

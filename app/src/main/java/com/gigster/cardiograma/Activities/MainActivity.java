@@ -3,7 +3,9 @@ package com.gigster.cardiograma.Activities;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -45,23 +47,23 @@ import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AppCompatActivity {
 
+    final String KEY_SavedSate = "key_savedstate";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("HistoryData.db").create();
-//        ActiveAndroid.initialize(dbConfiguration);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayUseLogoEnabled(false);
         setUpActionBar();
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_frag, new MainFragment()).commitAllowingStateLoss();
+        }
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_frag, new MainFragment()).commitAllowingStateLoss();
         initSurface();
-
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -72,18 +74,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Apptentive.onStart(this);
+        loadSettings();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Apptentive.onStop(this);
+        saveSettings();
     }
 
     @Override
     public void onDestroy() {
 
         super.onDestroy();
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_SavedSate, true);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -483,6 +497,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return result;
+    }
+
+    public void saveSettings(){
+        SharedPreferences preferences = this.getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("sound", GConstants.isSoundOn);
+        editor.putBoolean("auto", GConstants.isAutoStop);
+        editor.commit();
+    }
+    public void loadSettings(){
+        SharedPreferences preferences = this.getSharedPreferences("pref", MODE_PRIVATE);
+        GConstants.isSoundOn = preferences.getBoolean("sound", true);
+        GConstants.isAutoStop = preferences.getBoolean("auto", true);
     }
 
 

@@ -66,7 +66,7 @@ public class MainFragment extends Fragment {
         for (int i = 0; i < tabHost.getTabWidget().getTabCount(); i++) {
             AppCompatTextView appCompatTextView = (AppCompatTextView) tabHost.getTabWidget().getChildAt(i);
             appCompatTextView.setTextColor(getResources().getColor(R.color.colorBrandRed));
-            float aa = getResources().getDimension(R.dimen._10sdp);
+            float aa = getResources().getDimension(R.dimen._12sdp);
             appCompatTextView.setTextSize(20.0f);
             appCompatTextView.setGravity(Gravity.CENTER);
             int topPadding = (int)getResources().getDimension(R.dimen._4sdp);

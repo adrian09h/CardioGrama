@@ -1,5 +1,7 @@
 package com.gigster.cardiograma.Models;
 
+import android.content.SharedPreferences;
+
 /**
  * Created by admin1 on 3/1/2016.
  */
@@ -12,6 +14,8 @@ public class GConstants {
 
     public static boolean isAutoStop = true;
     public static boolean isSoundOn = true;
+
+
 
 
 

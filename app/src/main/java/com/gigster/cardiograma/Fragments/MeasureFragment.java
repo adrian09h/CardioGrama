@@ -4,7 +4,10 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.SystemClock;
+import android.provider.SyncStateContract;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,6 +79,8 @@ public class MeasureFragment extends Fragment {
     EditText editWarmup;
     @Bind(R.id.editExtreme)
     EditText editExtreme;
+    @Bind(R.id.txtCount)
+    TextView txtCount;
 
 
 
@@ -95,6 +100,11 @@ public class MeasureFragment extends Fragment {
     private int nCount = 0;
 
     private String motion_state;
+
+    private boolean isPassedTime = false;
+    private long startTime = 0L;
+    private Handler customHandler = new Handler();
+
 
     public static enum WORKING_MODE {
         Hint_Mode, Measuring_Mode, Save_Mode
@@ -180,8 +190,43 @@ public class MeasureFragment extends Fragment {
         isHeartBeatDetected = event.isDetected;
     }
 
-    void startPlot() {
+    void updateTimer(){
+        if (GConstants.isAutoStop){
+            CountDownTimer timer = new CountDownTimer(30000,1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    txtCount.setText("00:" + String.format("%02d", (int)(millisUntilFinished / 1000)));
+                }
 
+                @Override
+                public void onFinish() {
+                    txtCount.setText("00:00");
+                    isPassedTime = true;
+                }
+            }.start();
+        }else{
+            startTime = SystemClock.uptimeMillis();
+            customHandler.postDelayed(updateTimerThread, 0);
+        }
+    }
+    private Runnable updateTimerThread = new Runnable() {
+        public void run() {
+            long timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            int secs = (int) (timeInMilliseconds / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (timeInMilliseconds % 1000);
+            txtCount.setText(String.format("%02d", mins) + ":" + String.format("%02d", secs));
+            if (working_mode == WORKING_MODE.Measuring_Mode){
+                customHandler.postDelayed(this, 0);
+            }
+
+        }
+    };
+
+
+    void startPlot() {
+        updateTimer();
         DataPoint[] values = new DataPoint[1];
         values[0] = new DataPoint(0, 0);
         graph2LastXValue = 0d;
@@ -192,8 +237,9 @@ public class MeasureFragment extends Fragment {
                 graph2LastXValue += 1d;
                 double data = getRandom();
                 mSeries2.appendData(new DataPoint(graph2LastXValue, data), true, 100);
-                if (GConstants.isAutoStop && graph2LastXValue > 200){
+                if (GConstants.isAutoStop && isPassedTime){
                     onClickStart();
+                    isPassedTime = false;
                 }else{
                     mHandler.postDelayed(this, 100);
                 }
@@ -352,8 +398,8 @@ public class MeasureFragment extends Fragment {
             relHint.setVisibility(View.GONE);
             relGraph.setVisibility(View.VISIBLE);
             imgvStart.setImageResource(R.drawable.stop);
-            txtHeartBeat.setVisibility(View.INVISIBLE);
-            txtbpm.setVisibility(View.INVISIBLE);
+//            txtHeartBeat.setVisibility(View.INVISIBLE);
+//            txtbpm.setVisibility(View.INVISIBLE);
             startPlot();
         } else {
             stopPlot();
@@ -381,6 +427,4 @@ public class MeasureFragment extends Fragment {
         HistoryHeartData historyHeartData = new HistoryHeartData(sb.toString(), heart_beat, motion_state, today, motion_state_note);
         historyHeartData.save();
     }
-
-
 }

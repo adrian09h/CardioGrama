@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+    <ImageView
+        android:id="@+id/imgvLogo"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:padding="5dp"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter"
+        android:layout_centerInParent="true"
+        />
+    <ImageView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgvLogo"
+        android:padding="5dp"
+        android:src="@drawable/logo_text"
+        android:scaleType="fitCenter"
+        />
+</RelativeLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/relHintMeausre"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:visibility="visible">
 
         <RelativeLayout
@@ -20,11 +20,11 @@
 
             <ImageView
                 android:id="@+id/imgvHands"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/handscover" />
 
@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:text="@string/hint"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -52,13 +52,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="65"
+                android:text="0"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_30sdp"
+                android:textSize="@dimen/_24sdp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/txtCount"
@@ -66,12 +66,12 @@
                 android:layout_height="@dimen/_30sdp"
                 android:background="@drawable/roundrect_blackborder"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_36sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_15sdp"
                 android:gravity="center"
                 android:text="00:30"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
 
                 />
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/txtHeartBeat"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:layout_toRightOf="@+id/txtHeartBeat"
                 android:gravity="center"
                 android:text="@string/bpm"
@@ -90,9 +90,14 @@
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph2"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@+id/txtHeartBeat"
+                android:layout_toRightOf="@id/txtbpm"
+                android:layout_toLeftOf="@+id/txtCount"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:visibility="visible" />
 
             <!--<ImageView-->
@@ -113,15 +118,14 @@
         android:id="@+id/relStartButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="3"
         android:visibility="visible">
 
         <ImageView
             android:id="@+id/imgvStart"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:scaleType="fitCenter"
             android:src="@drawable/start" />
@@ -131,15 +135,16 @@
         android:id="@+id/relSaveMode"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:visibility="gone">
 
         <LinearLayout
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:background="@drawable/round_bg"
+            android:id="@+id/linBeats"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/circleredborder_bg"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical">
             <TextView
@@ -149,7 +154,7 @@
                 android:gravity="center"
                 android:text="65"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_18sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -158,13 +163,13 @@
                 android:gravity="center"
                 android:text="@string/bpm"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_8sdp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linButtons"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_30sdp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/_50sdp">
@@ -173,12 +178,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:layout_marginRight="@dimen/_40sdp"
                 android:background="@drawable/round_rect_buttonbg"
                 android:text="@string/Discard"
                 android:textColor="@color/colorDiscardBtn"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 android:gravity="center"
                 />
             <TextView
@@ -186,21 +191,22 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_40sdp"
                 android:background="@drawable/round_rect_buttonbg"
                 android:text="@string/Save"
                 android:textColor="@color/colorSaveBtn"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12sdp"
                 android:gravity="center"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_135sdp"
+            android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:layout_above="@+id/linButtons"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:layout_below="@+id/linBeats"
+            android:layout_marginTop="@dimen/_5sdp">
 
             <RelativeLayout
                 android:id="@+id/relRest"
@@ -211,7 +217,7 @@
                 <ImageView
                     android:id="@+id/imgvRest"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_alignParentTop="true"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_5sdp"
@@ -225,7 +231,7 @@
                     android:layout_below="@+id/imgvRest"
                     android:text="@string/REST"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_horizontal|top"
                     />
 
@@ -240,7 +246,7 @@
                 <ImageView
                     android:id="@+id/imgvWarmup"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_alignParentTop="true"
                     android:paddingLeft="@dimen/_5sdp"
                     android:paddingRight="@dimen/_5sdp"
@@ -254,7 +260,7 @@
                     android:layout_below="@+id/imgvWarmup"
                     android:text="@string/WARM_UP"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_horizontal|top"
                     />
 
@@ -270,7 +276,7 @@
                 <ImageView
                     android:id="@+id/imgvCardio"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_alignParentTop="true"
                     android:paddingLeft="@dimen/_5sdp"
                     android:paddingRight="@dimen/_5sdp"
@@ -284,7 +290,7 @@
                     android:layout_below="@+id/imgvCardio"
                     android:text="@string/CARDIO"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_horizontal|top"
                     />
 
@@ -298,7 +304,7 @@
                 <ImageView
                     android:id="@+id/imgvExtreme"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_alignParentTop="true"
                     android:paddingLeft="@dimen/_5sdp"
                     android:paddingRight="@dimen/_10sdp"
@@ -312,7 +318,7 @@
                     android:layout_below="@+id/imgvExtreme"
                     android:text="@string/EXTREME"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_horizontal|top"
                     />
 

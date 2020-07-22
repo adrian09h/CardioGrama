@@ -120,6 +120,33 @@ public class MeasureFragment extends Fragment {
                              Bundle savedInstanceState) {
         View frag = inflater.inflate(R.layout.fragment_measure, container, false);
         ButterKnife.bind(this, frag);
+        graph2 = frag.findViewById(R.id.graph2);
+        imgvStart = frag.findViewById(R.id.imgvStart);
+        relHint = frag.findViewById(R.id.relHint);
+        relGraph = frag.findViewById(R.id.relGraph);
+        txtHeartBeat = frag.findViewById(R.id.txtHeartBeat);
+        txtbpm = frag.findViewById(R.id.txtbpm);
+        relHintMeasure = frag.findViewById(R.id.relHintMeausre);
+        relStartButton = frag.findViewById(R.id.relStartButton);
+        relSaveMode = frag.findViewById(R.id.relSaveMode);
+        imgvRest = frag.findViewById(R.id.imgvRest);
+        imgvWarmUp = frag.findViewById(R.id.imgvWarmup);
+        imgvCardio = frag.findViewById(R.id.imgvCardio);
+        imgvExtreme = frag.findViewById(R.id.imgvExtreme);
+        txtHeartBeatSaveMode = frag.findViewById(R.id.txtHeartBeat_SaveMode);
+        editRest = frag.findViewById(R.id.editREST);
+        editCardio = frag.findViewById(R.id.editCardio);
+        editWarmup = frag.findViewById(R.id.editWarmup);
+        editExtreme = frag.findViewById(R.id.editExtreme);
+        txtCount = frag.findViewById(R.id.txtCount);
+
+        imgvStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickStart();
+            }
+        });
+
         activity = (MainActivity) this.getActivity();
         mSeries2 = new LineGraphSeries<DataPoint>();
         mSeries2.setColor(Color.RED);
@@ -152,11 +179,15 @@ public class MeasureFragment extends Fragment {
         EventBus.getDefault().unregister(this);
         stopPlot();
     }
-
+    boolean firstLaunch = false;
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+            if (!firstLaunch) {
+                firstLaunch = true;
+                return;
+            }
             motion_state = getResources().getString(R.string.WARM_UP);
             working_mode = WORKING_MODE.Hint_Mode;
             new Handler().postDelayed(new Runnable() {
@@ -296,7 +327,7 @@ public class MeasureFragment extends Fragment {
         return updatedYValue;
     }
 
-    @OnClick(R.id.imgvStart)
+
     void onClickStart() {
         if (working_mode == WORKING_MODE.Hint_Mode) {
             activity.startMeasure();
@@ -310,7 +341,7 @@ public class MeasureFragment extends Fragment {
         updateUI();
     }
 
-    @OnClick(R.id.relRest)
+
     void onClickRelRest() {
         if (!motion_state.equals(getResources().getString(R.string.REST))) {
             motion_state = getResources().getString(R.string.REST);

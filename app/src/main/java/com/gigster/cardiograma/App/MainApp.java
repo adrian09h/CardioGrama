@@ -1,8 +1,5 @@
 package com.gigster.cardiograma.App;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
-
 
 
 
@@ -14,7 +11,6 @@ public class MainApp extends com.activeandroid.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
 
     }
 }

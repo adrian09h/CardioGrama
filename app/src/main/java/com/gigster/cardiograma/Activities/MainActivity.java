@@ -29,15 +29,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.apptentive.android.sdk.Apptentive;
+
 import com.gigster.cardiograma.Contollers.ImageProcessing;
 import com.gigster.cardiograma.Fragments.MainFragment;
 import com.gigster.cardiograma.Models.GConstants;
 import com.gigster.cardiograma.Models.HeartBeatDetected;
 import com.gigster.cardiograma.Models.HeartBeatMsg;
 import com.gigster.cardiograma.R;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -64,23 +63,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         initSurface();
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Apptentive.onStart(this);
         loadSettings();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Apptentive.onStop(this);
         saveSettings();
     }
 
@@ -186,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void supportCustomer() {
-        Apptentive.showMessageCenter(MainActivity.this);
+
     }
 
     public void replaceFragment(Fragment frag, int anim_type, boolean isAddToBackStack) {

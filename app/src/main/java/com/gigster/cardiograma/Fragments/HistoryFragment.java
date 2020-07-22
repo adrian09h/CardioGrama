@@ -29,7 +29,7 @@ import de.greenrobot.event.EventBus;
  */
 public class HistoryFragment extends Fragment {
 
-    @Bind(R.id.listView)
+
     ListView listView;
     HistoryAdapter adapter;
 
@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View frag = inflater.inflate(R.layout.fragment_history, container, false);
         ButterKnife.bind(this, frag);
-
+        listView = frag.findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

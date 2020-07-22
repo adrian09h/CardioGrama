@@ -17,6 +17,10 @@ import com.gigster.cardiograma.R;
 
 import net.yanzm.mth.MaterialTabHost;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -26,12 +30,8 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends Fragment {
     MainActivity activity;
-
-    @Bind(R.id.pager)
     ViewPager pager;
-    @Bind(R.id.tabHost)
     MaterialTabHost tabHost;
-
     ViewPagerAdapter adapter;
 
     public MainFragment() {
@@ -45,7 +45,8 @@ public class MainFragment extends Fragment {
 
         View viewFrag = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, viewFrag);
-
+        tabHost = viewFrag.findViewById(R.id.tabHost);
+        pager = viewFrag.findViewById(R.id.pager);
         tabHost.setType(MaterialTabHost.Type.FullScreenWidth);
 
         adapter = new ViewPagerAdapter(activity.getSupportFragmentManager());
@@ -73,6 +74,11 @@ public class MainFragment extends Fragment {
             appCompatTextView.setPadding(0, topPadding, 0,0);
         }
 
+
+
+
+
+
         return viewFrag;
     }
 
@@ -85,6 +91,13 @@ public class MainFragment extends Fragment {
 //                pager.setCurrentItem(0);
 //            }
 //        }, 1000);
+        boolean is = isCurrentActive("", 0);
+    }
+
+    private boolean isCurrentActive(String hour, int nWeekday){
+
+
+        return true;
     }
 
 

@@ -11,6 +11,7 @@
     <string name="REST">REST</string>
     <string name="WARM_UP">WARM UP</string>
     <string name="CARDIO">CARDIO</string>
+    <string name="accept">ACCEPT</string>
     <string name="EXTREME">EXTREME</string>
     <string name="mopubAdsId">cf0e867b51ff412a8df7c4b0f77e265f</string>
     <string name="admobAdsId">ca-app-pub-3940256099942544/6300978111</string>

@@ -36,8 +36,7 @@
             android:name="AA_DB_VERSION"
             android:value="1" />
 
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+
 
 
         <activity
@@ -56,13 +55,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <meta-data android:name="apptentive_api_key" android:value="8df93e9139807fb27e3b74d1967abb0bb06330102fe213e8817ca510363e6e7e"/>
-        <activity android:name="com.apptentive.android.sdk.ViewActivity"
-            android:theme="@style/ApptentiveTheme"/>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="fea5ab4d82e9f6f3ea38a647e0aa2d46af592fa6" />
     </application>
 
 </manifest>

@@ -55,6 +55,12 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
+        <provider
+          android:name="com.activeandroid.content.ContentProvider"
+          android:authorities="com.gigster.cardiograma"
+          android:enabled="true"
+          android:exported="false">
+        </provider>
 
     </application>
 

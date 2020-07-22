@@ -140,12 +140,55 @@ public class MeasureFragment extends Fragment {
         editExtreme = frag.findViewById(R.id.editExtreme);
         txtCount = frag.findViewById(R.id.txtCount);
 
+        frag.findViewById(R.id.relRest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickRelRest();
+            }
+        });
+
+        frag.findViewById(R.id.relWarmUp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickRelWarmUp();
+            }
+        });
+
+        frag.findViewById(R.id.relCardio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickRelCardio();
+            }
+        });
+
         imgvStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickStart();
             }
         });
+
+        frag.findViewById(R.id.relExtreme).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickRelExtreme();
+            }
+        });
+
+        frag.findViewById(R.id.txtSave).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSave();
+            }
+        });
+
+        frag.findViewById(R.id.txtDiscard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickDiscard();
+            }
+        });
+
 
         activity = (MainActivity) this.getActivity();
         mSeries2 = new LineGraphSeries<DataPoint>();
@@ -354,7 +397,7 @@ public class MeasureFragment extends Fragment {
 
     }
 
-    @OnClick(R.id.relWarmUp)
+
     void onClickRelWarmUp() {
         if (!motion_state.equals(getResources().getString(R.string.WARM_UP))) {
             motion_state = getResources().getString(R.string.WARM_UP);
@@ -366,7 +409,7 @@ public class MeasureFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.relCardio)
+
     void onClickRelCardio() {
         if (!motion_state.equals(getResources().getString(R.string.CARDIO))) {
             motion_state = getResources().getString(R.string.CARDIO);
@@ -378,7 +421,6 @@ public class MeasureFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.relExtreme)
     void onClickRelExtreme() {
         if (!motion_state.equals(getResources().getString(R.string.EXTREME))) {
             motion_state = getResources().getString(R.string.EXTREME);
@@ -390,7 +432,6 @@ public class MeasureFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.txtSave)
     void onClickSave() {
         String strMotionStateNote = "";
         if (motion_state.equals(getResources().getString(R.string.REST))){
@@ -406,7 +447,7 @@ public class MeasureFragment extends Fragment {
         onClickDiscard();
     }
 
-    @OnClick(R.id.txtDiscard)
+
     void onClickDiscard() {
         working_mode = WORKING_MODE.Hint_Mode;
         updateUI();

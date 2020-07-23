@@ -2,7 +2,7 @@
 
 Android(Java) application that measure heart beat using phone's camera. Save historical data and supports customer service.
 
-**Download** APK file from [here](https://github.com/adrian09h/CardioGrama/files/4967699/CardioGrama.apk.zip)
+- **Download** APK file from [here](https://github.com/adrian09h/CardioGrama/files/4967699/CardioGrama.apk.zip)
 
 - Screenshots
 
